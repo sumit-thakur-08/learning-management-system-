@@ -16,21 +16,55 @@ const Navbar = () => {
 
         {/* LINKS */}
         <div className="flex items-center gap-6">
+
           <NavLink
             to="/"
             className={({ isActive }) =>
-              isActive ? "text-accentColor font-medium" : "text-fontColor"
+              isActive
+                ? "text-accentColor font-medium"
+                : "text-fontColor"
             }
           >
             Home
           </NavLink>
 
+          {/* USER DASHBOARD */}
+          {user && user.role === "user" && (
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-accentColor font-medium"
+                  : "text-fontColor"
+              }
+            >
+              Dashboard
+            </NavLink>
+          )}
+
+          {/* ADMIN DASHBOARD */}
+          {user && user.role === "admin" && (
+            <NavLink
+              to="/admin"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-accentColor font-medium"
+                  : "text-fontColor"
+              }
+            >
+              Admin Panel
+            </NavLink>
+          )}
+
+          {/* AUTH LINKS */}
           {!user ? (
             <>
               <NavLink
                 to="/login"
                 className={({ isActive }) =>
-                  isActive ? "text-accentColor font-medium" : "text-fontColor"
+                  isActive
+                    ? "text-accentColor font-medium"
+                    : "text-fontColor"
                 }
               >
                 Login
@@ -55,6 +89,7 @@ const Navbar = () => {
               </Button>
             </>
           )}
+
         </div>
       </nav>
     </header>

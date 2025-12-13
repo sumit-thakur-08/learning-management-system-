@@ -1,11 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import { Login, Signup } from "./pages/auth";
-import { Navbar } from "./components";
-import ProtectedRoute from "./routes/ProtectedRoute";
-
 import UserDashboard from "./pages/user/UserDashboard";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import { Navbar } from "./components";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import Forbidden from "./pages/Forbidden";
+
+
+
 
 function App() {
   return (
@@ -13,25 +16,26 @@ function App() {
       <Navbar />
 
       <Routes>
+        {/* Public */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-
-        {/* USER ROUTE */}
+        <Route path="/forbidden" element={<Forbidden />} />
+        {/* User Only */}
         <Route
           path="/dashboard"
           element={
-            <ProtectedRoute role="user">
+            <ProtectedRoute allowedRoles={["user"]}>
               <UserDashboard />
             </ProtectedRoute>
           }
         />
 
-        {/* ADMIN ROUTE */}
+        {/* Admin Only */}
         <Route
           path="/admin"
           element={
-            <ProtectedRoute role="admin">
+            <ProtectedRoute allowedRoles={["admin"]}>
               <AdminDashboard />
             </ProtectedRoute>
           }
