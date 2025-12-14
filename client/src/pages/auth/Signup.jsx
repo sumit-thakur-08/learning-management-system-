@@ -1,63 +1,74 @@
-import { Link } from "react-router-dom";
-import { Button } from "../../components";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { signupUser } from "../../services/auth.service";
 
 const Signup = () => {
-  return (
-    <div className="min-h-screen bg-body flex items-center justify-center px-4">
+  const navigate = useNavigate();
 
-      <div className="bg-light w-full max-w-md rounded-2xl shadow-xl p-8">
-        <h2 className="text-3xl font-bold mb-2">
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await signupUser(form); // 🔥 backend connect
+      navigate("/login");
+    } catch (error) {
+      alert(error.response?.data?.message || "Signup failed");
+    }
+  };
+
+  return (
+    // ⬇️ YE BHI TUMHARA PEHLA WALA DESIGN HAI
+    <div className="min-h-screen flex items-center justify-center bg-body">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-md bg-light p-8 rounded-xl shadow-md"
+      >
+        <h2 className="text-2xl font-bold text-center mb-6">
           Create Account
         </h2>
 
-        <p className="text-spanColor mb-8">
-          Join and explore our library
-        </p>
+        <input
+          type="text"
+          placeholder="Name"
+          className="w-full mb-4 px-4 py-2 border rounded"
+          value={form.name}
+          onChange={(e) =>
+            setForm({ ...form, name: e.target.value })
+          }
+        />
 
-        <form className="space-y-5">
-          <div>
-            <label className="block text-sm mb-1">Name</label>
-            <input
-              type="text"
-              placeholder="John Doe"
-              className="w-full px-4 py-3 rounded-lg border border-lightBg
-              focus:outline-none focus:ring-2 focus:ring-accentColor/40"
-            />
-          </div>
+        <input
+          type="email"
+          placeholder="Email"
+          className="w-full mb-4 px-4 py-2 border rounded"
+          value={form.email}
+          onChange={(e) =>
+            setForm({ ...form, email: e.target.value })
+          }
+        />
 
-          <div>
-            <label className="block text-sm mb-1">Email</label>
-            <input
-              type="email"
-              placeholder="you@example.com"
-              className="w-full px-4 py-3 rounded-lg border border-lightBg
-              focus:outline-none focus:ring-2 focus:ring-accentColor/40"
-            />
-          </div>
+        <input
+          type="password"
+          placeholder="Password"
+          className="w-full mb-6 px-4 py-2 border rounded"
+          value={form.password}
+          onChange={(e) =>
+            setForm({ ...form, password: e.target.value })
+          }
+        />
 
-          <div>
-            <label className="block text-sm mb-1">Password</label>
-            <input
-              type="password"
-              placeholder="••••••••"
-              className="w-full px-4 py-3 rounded-lg border border-lightBg
-              focus:outline-none focus:ring-2 focus:ring-accentColor/40"
-            />
-          </div>
-
-          <Button className="w-full">
-            Sign Up
-          </Button>
-        </form>
-
-        <p className="text-sm text-center text-spanColor mt-6">
-          Already have an account?{" "}
-          <Link to="/login" className="text-accentColor hover:underline">
-            Login
-          </Link>
-        </p>
-      </div>
-
+        <button
+          type="submit"
+          className="w-full bg-accentColor text-white py-2 rounded"
+        >
+          Sign Up
+        </button>
+      </form>
     </div>
   );
 };
