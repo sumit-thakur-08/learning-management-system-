@@ -1,12 +1,15 @@
+import { Sidebar } from "../../components";
+// import DashboardNavbar from "../../components/DashboardNavbar";
+
 const UserDashboard = () => {
   return (
-    <div className="p-10">
-      <h1 className="text-3xl font-bold">
-        User Dashboard
-      </h1>
-      <p className="text-spanColor mt-2">
-        Welcome to your account
-      </p>
+    <div className="flex min-h-screen">
+      <Sidebar />
+      <div className="flex-1">
+        {/* <DashboardNavbar /> */}
+        {/* dashboard content */}
+        <h2>Hiiiiiii</h2>
+      </div>
     </div>
   );
 };
