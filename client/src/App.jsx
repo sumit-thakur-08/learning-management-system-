@@ -3,9 +3,9 @@ import Home from "./pages/Home";
 import { Login, Signup } from "./pages/auth";
 import UserDashboard from "./pages/user/UserDashboard";
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import ProtectedRoute from "./routes/ProtectedRoute";
+import ProtectedRoutes from "./routes/ProtectedRoute";
 import Forbidden from "./pages/Forbidden";
-import PublicLayout from "./layouts/PublicLayout";
+import PublicLayout from "./Layout/PublicLayout";
 
 function App() {
   return (
@@ -24,9 +24,9 @@ function App() {
       <Route
         path="/dashboard"
         element={
-          <ProtectedRoute allowedRoles={["user"]}>
+          <ProtectedRoutes allowedRoles={["user"]}>
             <UserDashboard />
-          </ProtectedRoute>
+          </ProtectedRoutes>
         }
       />
 
@@ -34,9 +34,9 @@ function App() {
       <Route
         path="/admin"
         element={
-          <ProtectedRoute allowedRoles={["admin"]}>
+          <ProtectedRoutes allowedRoles={["admin"]}>
             <AdminDashboard />
-          </ProtectedRoute>
+          </ProtectedRoutes>
         }
       />
 
