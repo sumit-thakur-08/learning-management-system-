@@ -1,17 +1,19 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <aside className="w-64 bg-white shadow p-4">
-      <h2 className="text-xl font-bold mb-6">📚 LMS</h2>
+    <div className="w-64 bg-indigo-600 text-white p-4">
+      <h2 className="text-lg font-bold mb-6">Library Menu</h2>
 
-      <nav className="space-y-3">
-        <Link to="/user/dashboard">Books</Link>
-        <Link to="/user/profile">Profile</Link>
-        <Link to="/logout" className="text-red-500">Logout</Link>
+      <nav className="flex flex-col gap-3">
+        <NavLink to="/dashboard">📊 Dashboard</NavLink>
+        <NavLink to="/books">📚 All Books</NavLink>
+        <NavLink to="/history">🧾 Purchase History</NavLink>
+        <NavLink to="/payments">💳 Payments</NavLink>
       </nav>
-    </aside>
+    </div>
   );
 };
 
 export default Sidebar;
+
